@@ -17,13 +17,14 @@ const axios_1 = __importDefault(require("axios"));
 const cheerio_1 = __importDefault(require("cheerio"));
 function getPlayStoreAppIconFromUrl(url) {
     return __awaiter(this, void 0, void 0, function* () {
+        const searchUrl = url.includes('&') ? url.split('&')[0] : url;
         return axios_1.default
-            .get(url)
+            .get(searchUrl)
             .then((response) => {
             const $ = cheerio_1.default.load(response.data);
             const imgs = $("img[alt='Cover art']");
             if (imgs.length === 0) {
-                console.warn("Couldn't find Play Store app with the URL:", url);
+                console.warn("Couldn't find Play Store app with the URL:", searchUrl);
                 return undefined;
             }
             else {

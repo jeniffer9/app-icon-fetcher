@@ -2,14 +2,15 @@ import axios from "axios";
 import cheerio from "cheerio";
 
 export async function getPlayStoreAppIconFromUrl(url: string) {
+    const searchUrl = url.includes('&') ? url.split('&')[0] : url;
     return axios
-        .get(url)
+        .get(searchUrl)
         .then((response) => {
             const $ = cheerio.load(response.data);
             const imgs = $("img[alt='Cover art']");
 
             if (imgs.length === 0) {
-                console.warn("Couldn't find Play Store app with the URL:", url)
+                console.warn("Couldn't find Play Store app with the URL:", searchUrl)
                 return undefined;
             } else {
                 return $(imgs[0]).attr("src");
