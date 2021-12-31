@@ -1,0 +1,22 @@
+{
+  "name": "app-icon-fetcher",
+  "version": "1.0.1",
+  "description": "Fetches the icon url of an app from the App Store or Play Store.",
+  "keywords": ["app", "icon"],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeniffer Lima Graf",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
