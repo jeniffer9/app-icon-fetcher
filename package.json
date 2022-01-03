@@ -1,6 +1,6 @@
 {
   "name": "app-icon-fetcher",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Fetches the icon url of an app from the App Store or Play Store.",
   "keywords": ["app", "icon"],
   "main": "dist/index.js",

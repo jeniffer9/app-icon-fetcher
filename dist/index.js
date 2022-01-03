@@ -27,6 +27,9 @@ function getPlayStoreAppIconFromUrl(url) {
             headers
         })
             .then((response) => {
+            response.headers['cross-origin-resource-policy'] = '*';
+            response.headers['Access-Control-Allow-Origin'] = '*';
+            response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,PATCH,OPTIONS';
             const $ = cheerio_1.default.load(response.data);
             const imgs = $("img[alt='Cover art']");
             if (imgs.length === 0) {
@@ -55,6 +58,9 @@ function getAppStoreAppIconFromUrl(url) {
         })
             .then((response) => {
             var _a;
+            response.headers['cross-origin-resource-policy'] = '*';
+            response.headers['Access-Control-Allow-Origin'] = '*';
+            response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,PATCH,OPTIONS';
             const $ = cheerio_1.default.load(response.data);
             const imgs = $("source[type='image/png']", ".product-hero__artwork");
             if (imgs.length === 0) {

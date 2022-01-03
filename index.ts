@@ -13,6 +13,9 @@ export async function getPlayStoreAppIconFromUrl(url: string) {
             headers
         })
         .then((response) => {
+            response.headers['cross-origin-resource-policy'] = '*';
+            response.headers['Access-Control-Allow-Origin'] = '*';
+            response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,PATCH,OPTIONS';
             const $ = cheerio.load(response.data);
             const imgs = $("img[alt='Cover art']");
 
@@ -39,6 +42,9 @@ export async function getAppStoreAppIconFromUrl(url: string) {
         headers
     })
     .then((response) => {
+        response.headers['cross-origin-resource-policy'] = '*';
+        response.headers['Access-Control-Allow-Origin'] = '*';
+        response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,PATCH,OPTIONS';
         const $ = cheerio.load(response.data);
         const imgs = $("source[type='image/png']", ".product-hero__artwork");
 
