@@ -15,11 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAppStoreAppIconFromUrl = exports.getPlayStoreAppIconFromUrl = void 0;
 const axios_1 = __importDefault(require("axios"));
 const cheerio_1 = __importDefault(require("cheerio"));
+const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+};
 function getPlayStoreAppIconFromUrl(url) {
     return __awaiter(this, void 0, void 0, function* () {
         const searchUrl = url.includes('&') ? url.split('&')[0] : url;
         return axios_1.default
-            .get(searchUrl)
+            .get(searchUrl, {
+            headers
+        })
             .then((response) => {
             const $ = cheerio_1.default.load(response.data);
             const imgs = $("img[alt='Cover art']");
@@ -44,7 +50,9 @@ exports.getPlayStoreAppIconFromUrl = getPlayStoreAppIconFromUrl;
 function getAppStoreAppIconFromUrl(url) {
     return __awaiter(this, void 0, void 0, function* () {
         return axios_1.default
-            .get(url)
+            .get(url, {
+            headers
+        })
             .then((response) => {
             var _a;
             const $ = cheerio_1.default.load(response.data);

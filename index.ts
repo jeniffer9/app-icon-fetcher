@@ -1,10 +1,17 @@
 import axios from "axios";
 import cheerio from "cheerio";
 
+const headers = {
+    'Access-Control-Allow-Origin' : '*',
+    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+};
+
 export async function getPlayStoreAppIconFromUrl(url: string) {
     const searchUrl = url.includes('&') ? url.split('&')[0] : url;
     return axios
-        .get(searchUrl)
+        .get(searchUrl, {
+            headers
+        })
         .then((response) => {
             const $ = cheerio.load(response.data);
             const imgs = $("img[alt='Cover art']");
@@ -28,7 +35,9 @@ export async function getPlayStoreAppIconFromUrl(url: string) {
 
 export async function getAppStoreAppIconFromUrl(url: string) {
   return axios
-    .get(url)
+    .get(url, {
+        headers
+    })
     .then((response) => {
         const $ = cheerio.load(response.data);
         const imgs = $("source[type='image/png']", ".product-hero__artwork");
